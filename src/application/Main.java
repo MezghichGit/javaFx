@@ -18,6 +18,7 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 //import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
@@ -75,6 +76,7 @@ public class Main extends Application {
         
         //PasswordField PasswordTextField = new PasswordField();
         GridPane layout = new GridPane();
+        VBox layout2 = new VBox();
         
         layout.setPadding(new Insets(10, 10, 10, 10)); 
         layout.setVgap(5); 
@@ -91,10 +93,20 @@ public class Main extends Application {
         
         
         Button btnAjouter = new Button("Ajouter");
-        Button btnListEtudiants = new Button("Etudiants List");
+        
+        Button btnFrameListEtudiants = new Button("Vers Liste Etudiants ");
+        
+        Button btnEtudiants = new Button("List des Etudiants");
+        Button btnFrameAddEtudiant = new Button("Vers Add Etudiant");
+        
+        layout2.setMargin(btnFrameAddEtudiant,new Insets(10, 10, 10, 80));
+        layout2.setMargin(btnEtudiants,new Insets(10, 10, 10, 80));
         
         layout.add(btnAjouter, 0,3);
-        layout.add(btnListEtudiants, 1,3); 
+        layout.add(btnFrameListEtudiants, 1,3); 
+        
+        //layout2.add(btnFrameAddEtudiant, 0, 0);
+        layout2.getChildren().addAll(btnFrameAddEtudiant,btnEtudiants);
         
        // action event : click sur btnValide
         EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
@@ -121,6 +133,7 @@ public class Main extends Application {
         
         /*****************/
         // action event : click sur btnReset
+        
         EventHandler<ActionEvent> eventReset = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
@@ -132,16 +145,20 @@ public class Main extends Application {
         };
   
         // when btnValid is pressed
-        btnListEtudiants.setOnAction(eventReset);
-        
+        //btnListEtudiants.setOnAction(eventReset);
+        btnEtudiants.setOnAction(eventReset);
         Scene scene = new Scene(layout, 280, 150);  
- 
+        Scene scene2 = new Scene(layout2, 280, 150); 
+        
+        btnFrameListEtudiants.setOnAction(e->primaryStage.setScene(scene2));
+        btnFrameAddEtudiant.setOnAction(e->primaryStage.setScene(scene));
         primaryStage.setTitle("Formulaire d'ajout d'un étudiant");
         primaryStage.setScene(scene);   
         primaryStage.show();    
     }
 
 	public static void main(String[] args) {
+		
 		launch(args);
 	}
 }
