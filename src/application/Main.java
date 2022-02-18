@@ -1,5 +1,8 @@
 package application;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -18,6 +21,8 @@ import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
 public class Main extends Application {
+	
+	List <Etudiant> etudiants = new ArrayList<>();
 	/*
 	 * @Override public void start(Stage primaryStage) { try { String ch =
 	 * "formation JavaFX"; StackPane root = new StackPane(); // gestionnaire des
@@ -86,11 +91,15 @@ public class Main extends Application {
         EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-                
+                /*
             	String username = UsernameTextField.getText();
                 String password = PasswordTextField.getText();
                 System.out.println("Votre username : "+ username+ " Votre password : "+password);
-                
+                */
+            	Etudiant etudiant = new Etudiant(UsernameTextField.getText(),PasswordTextField.getText(),"Paris");
+            	//System.out.println(etudiant.toString());
+            	etudiants.add(etudiant);
+            	//System.out.println(etudiant);
             }
         };
   
@@ -104,8 +113,10 @@ public class Main extends Application {
         EventHandler<ActionEvent> eventReset = new EventHandler<ActionEvent>() {
             public void handle(ActionEvent e)
             {
-            	UsernameTextField.clear();  //clear() : vider le contenu de l'input
-                PasswordTextField.clear();
+            	/*UsernameTextField.clear();  //clear() : vider le contenu de l'input
+                PasswordTextField.clear();*/
+            	
+            	System.out.println(etudiants);
             }
         };
   
