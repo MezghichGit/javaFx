@@ -62,13 +62,18 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
 		
 		
-		Label UsernameLabel = new Label("Username:");
+		Label UsernameLabel = new Label("Nom:");
 		TextField UsernameTextField = new TextField();
 		
 		
-        Label PasswordLabel = new Label("Password:"); 
-        //TextField PasswordTextField  = new TextField();
-        PasswordField PasswordTextField = new PasswordField();
+        Label EmailLabel = new Label("Email:"); 
+        TextField UserEmailTextField  = new TextField();
+        
+        
+        Label VilleLabel = new Label("Ville:"); 
+        TextField UserVilleTextField  = new TextField();
+        
+        //PasswordField PasswordTextField = new PasswordField();
         GridPane layout = new GridPane();
         
         layout.setPadding(new Insets(10, 10, 10, 10)); 
@@ -78,14 +83,18 @@ public class Main extends Application {
         layout.add(UsernameLabel, 0,0);
         layout.add(UsernameTextField, 1,0);
         
-        layout.add(PasswordLabel, 0,1);
-        layout.add(PasswordTextField, 1,1);
+        layout.add(EmailLabel, 0,1);
+        layout.add(UserEmailTextField, 1,1);
      
-        Button btnValid = new Button("Valider");
-        Button btnReset = new Button("Reset");
+        layout.add(VilleLabel, 0,2);
+        layout.add(UserVilleTextField, 1,2);
         
-        layout.add(btnReset, 0,2);
-        layout.add(btnValid, 1,2); 
+        
+        Button btnAjouter = new Button("Ajouter");
+        Button btnListEtudiants = new Button("Etudiants List");
+        
+        layout.add(btnAjouter, 0,3);
+        layout.add(btnListEtudiants, 1,3); 
         
        // action event : click sur btnValide
         EventHandler<ActionEvent> eventSubmit = new EventHandler<ActionEvent>() {
@@ -96,15 +105,17 @@ public class Main extends Application {
                 String password = PasswordTextField.getText();
                 System.out.println("Votre username : "+ username+ " Votre password : "+password);
                 */
-            	Etudiant etudiant = new Etudiant(UsernameTextField.getText(),PasswordTextField.getText(),"Paris");
+            	Etudiant etudiant = new Etudiant(UsernameTextField.getText(),UserEmailTextField.getText(),UserVilleTextField.getText());
             	//System.out.println(etudiant.toString());
             	etudiants.add(etudiant);
-            	//System.out.println(etudiant);
+            	UsernameTextField.clear();
+            	UserEmailTextField.clear();
+            	UserVilleTextField.clear();
             }
         };
   
         // when btnValid is pressed
-        btnValid.setOnAction(eventSubmit);
+        btnAjouter.setOnAction(eventSubmit);
         
         
         
@@ -121,11 +132,11 @@ public class Main extends Application {
         };
   
         // when btnValid is pressed
-        btnReset.setOnAction(eventReset);
+        btnListEtudiants.setOnAction(eventReset);
         
-        Scene scene = new Scene(layout, 300, 120);  
+        Scene scene = new Scene(layout, 280, 150);  
  
-        primaryStage.setTitle("Formulaire de login");
+        primaryStage.setTitle("Formulaire d'ajout d'un étudiant");
         primaryStage.setScene(scene);   
         primaryStage.show();    
     }
